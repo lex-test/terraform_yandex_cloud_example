@@ -1,0 +1,7 @@
+[balancer]
+proxy ansible_host=${ip[0]} ansible_user=debian
+
+[webservers]
+web1 ansible_host=${ip[1]} ansible_user=debian
+web2 ansible_host=${ip[2]} ansible_user=debian
+

@@ -1,0 +1,15 @@
+---
+# tasks file for nginx_custom
+- name: Установка Nginx 
+  apt:
+    name: "nginx"
+    state: present
+    #update_cache: yes
+  become: true
+
+- name: Подмена веб-страницы
+  ansible.builtin.template:
+    src: index.j2
+    dest: /var/www/html/index.html
+  become: true
+  notify: "Nginx Reloader"

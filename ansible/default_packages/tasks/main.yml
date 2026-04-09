@@ -1,0 +1,16 @@
+---
+# tasks file for default_packages
+
+- name: Clean incorrect yandex repository
+  ansible.builtin.command: sed -i '/bullseye-backports/d' /etc/apt/sources.list
+  become: true
+
+- name: Установка программ #Имя задачи 
+  apt: #Используемый модуль
+    name: "{{ item }}" #Имя пакета из цикла
+    state: present #Параметр действия. present - установить, absent - удалить
+    update_cache: yes
+  loop:
+    - "{{ packages_to_install }}" #Цикл будет перебирать все значения из переменной "packages"
+  become: true
+#  when: ansible_distribution == "Debian" # Выполнится только на Debian системах

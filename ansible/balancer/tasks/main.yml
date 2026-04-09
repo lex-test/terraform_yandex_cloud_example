@@ -1,0 +1,15 @@
+---
+# tasks file for balancer
+- name: Установка Nginx
+  apt:
+        name: nginx
+        state: present
+        #update_cache: yes
+  become: true
+
+- name: Настройка проксирования
+  template:
+        src: templates/proxy.conf.j2
+        dest: /etc/nginx/conf.d/proxy.conf
+  notify: "Nginx Reloader"
+  become: true
